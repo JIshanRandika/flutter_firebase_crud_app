@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       appBar: AppBar(
-        title: Text('todo'),
+        title: Text('To Do'),
       ),
       body: StreamBuilder(
         stream: _usersStream,
