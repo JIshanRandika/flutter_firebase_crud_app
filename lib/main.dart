@@ -3,11 +3,21 @@ import 'package:flutter_firebase_crud_app/addnote.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'package:unique_identifier/unique_identifier.dart';
+import 'package:device_info/device_info.dart';
+
 import 'editenote.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+  AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+
+  var phoneID = androidInfo.androidId;
+  print(phoneID);
+
   runApp(MyApp());
 }
 
@@ -17,12 +27,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+  // List <Widget> textWidgets = [];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "todo app",
       theme: ThemeData(
-        primaryColor: Colors.blue[900],
+        primarySwatch: Colors.amber,
       ),
       home: Home(),
     );
@@ -35,13 +48,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  // var identifier = UniqueIdentifier.serial;
+  // DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+  // List <Widget> textWidgets = [];
+  // AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+
+  // var phineid='';
+
+  String notes='notes';
+
+
   final Stream<QuerySnapshot> _usersStream =
   FirebaseFirestore.instance.collection('notes').snapshots();
   @override
   Widget build(BuildContext context) {
+    print('${notes}');
+
+    // DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+
+          // AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+          //
+          // setState(() {
+          //
+          //   textWidgets.add(Text('androidID: ${androidInfo.androidId}'));
+          // });
+
+
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (_) => addnote()));
         },
@@ -95,7 +132,7 @@ class _HomeState extends State<Home> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
-                              color: Colors.black,
+                              color: Colors.amber,
                             ),
                           ),
                           title: Text(

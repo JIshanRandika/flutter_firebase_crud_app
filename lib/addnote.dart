@@ -42,6 +42,7 @@ class addnote extends StatelessWidget {
                 ),
               ),
             ),
+            ColoredBox(color: Colors.amber),
             SizedBox(
               height: 10,
             ),
